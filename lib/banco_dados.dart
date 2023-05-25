@@ -10,8 +10,13 @@ void main() async {
 
   print(insert.affectedRows);
 
-  var update = await mysqlConnection
-      .query('update aluno set nome=? where id =?', ['Fabricio Dourado', 1]);
+  try {
+    await mysqlConnection
+        .query('update aluno set nome=? where id =?', ['Fabricio Dourado', 1]);
+    print('Atualizando com sucesso');
+  } catch (e) {
+    print('Erro ao atualizar aluno');
+  }
 
   var aluno = await mysqlConnection.query('select * from aluno');
   print(aluno);
